@@ -1,6 +1,6 @@
 #!/bin/bash
 
-latest_file=$(ls -l *.c | awk 'NR>1 && $1 ~ /^-/ && $(NF-1) ~ /:/ {print $(NF-3)"-"$(NF-2)"-"$(NF-1), $NF}')
+latest_file=$(ls -l *.c | awk '$1 ~ /^-/ && $(NF-1) ~ /:/ {print $(NF-3)"-"$(NF-2)"-"$(NF-1), $NF}')
 
 create_sortable_dates(){
     local dates=""
