@@ -22,6 +22,9 @@ echo ""
 echo "Running: $file_to_run"
 echo "--------"
 
+#remove old file if it exists
+rm -f "${file_to_run::-2}"
+
 gcc -std=c17 -Wall -Wextra -pedantic -o ${file_to_run::-2} ${file_to_run} #> /dev/null 2>&1
 
 ./${file_to_run::-2}
@@ -31,9 +34,4 @@ echo "--------"
 echo "Completed: $file_to_run"
 echo "--------"
  
-
-
-
-
-
 
