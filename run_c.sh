@@ -16,8 +16,6 @@ create_sortable_dates(){
 dates=$(create_sortable_dates "$latest_file")
 file_to_run=$(echo "$dates" | sort -r | awk 'NR==1 {print $2}')
 
-
-
 echo ""
 echo "Running: $file_to_run"
 echo "--------"
@@ -25,13 +23,19 @@ echo "--------"
 #remove old file if it exists
 rm -f "${file_to_run::-2}"
 
+#add timing capability if t or time given
+
 gcc -std=c17 -Wall -Wextra -pedantic -o ${file_to_run::-2} ${file_to_run} #> /dev/null 2>&1
 
-./${file_to_run::-2}
-
+ if [[ $# -ne 0 ]]; then
+    echo "Time mode active"
+    time ./${file_to_run::-2}
+ else
+    ./${file_to_run::-2}
+fi
+ 
 echo ""
 echo "--------"
 echo "Completed: $file_to_run"
 echo "--------"
  
-
